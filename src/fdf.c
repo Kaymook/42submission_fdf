@@ -6,7 +6,7 @@
 /*   By: mosh <mosh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 19:03:07 by kmoshker          #+#    #+#             */
-/*   Updated: 2024/09/19 17:17:17 by mosh             ###   ########.fr       */
+/*   Updated: 2024/09/19 21:45:22 by mosh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static int	destroy(t_dot *data, t_dot **matrix)
 	(void)data;
 	exit(0);
 }
-__attribute__((destructor))static void destructor()
-{
-	system("leaks -q fdf");
-}
+// __attribute__((destructor))static void destructor()
+// {
+// 	system("leaks -q fdf");
+// }
 int	main(int argc, char **argv)
 {
 	t_dot	**matrix;

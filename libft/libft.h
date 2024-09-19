@@ -6,7 +6,7 @@
 /*   By: mosh <mosh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 22:30:36 by kmoshker          #+#    #+#             */
-/*   Updated: 2024/04/23 23:47:53 by mosh             ###   ########.fr       */
+/*   Updated: 2024/09/19 21:50:49 by mosh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10000
+#  define BUFFER_SIZE 1024
 # endif
 
 # include <unistd.h>
@@ -78,4 +78,7 @@ void	ft_lstiter(t_list *lst, void (*f)(int));
 // t_list	*ft_lstmap(t_list *lst, void *(*f)(int), void (*del)(int));
 int		ft_abs(int num);
 char	*get_next_line(int fd);
+char	*read_line(int fd, char *memory);
+char	*trim_line(char *memory);
+char	*trim_over_line(char *memory);
 #endif

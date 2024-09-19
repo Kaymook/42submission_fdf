@@ -6,7 +6,7 @@
 /*   By: mosh <mosh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 19:03:35 by kmoshker          #+#    #+#             */
-/*   Updated: 2024/09/09 00:24:08 by mosh             ###   ########.fr       */
+/*   Updated: 2024/09/19 21:51:27 by mosh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ t_dot	**read_map(char *file_name)
 
 	fd = open_file(file_name);
 	matrix_of_dots = memory_allocete(file_name);
+
 	i = 0;
 	while (get_height(file_name) > i)
 	{
 		line = get_next_line(fd);
 		get_dots_from_line(line, matrix_of_dots, i++);
+		// exit(0);
 	}
 	// free(line);
 	matrix_of_dots[i] = NULL;
