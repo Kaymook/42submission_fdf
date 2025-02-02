@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "fdf.h"
 
-int		get_dots_from_line(char *line, t_dot **matrix_of_dots, int y)
+int	get_dots_from_line(char *line, t_dot **matrix_of_dots, int y)
 {
 	char	**dots;
 	int		x;
@@ -57,20 +56,16 @@ t_dot	**read_map(char *file_name)
 
 	fd = open_file(file_name);
 	matrix_of_dots = memory_allocete(file_name);
-
 	i = 0;
 	while (get_height(file_name) > i)
 	{
 		line = get_next_line(fd);
 		get_dots_from_line(line, matrix_of_dots, i++);
-		// exit(0);
 	}
-	// free(line);
 	matrix_of_dots[i] = NULL;
 	close(fd);
 	return (matrix_of_dots);
 }
-
 
 int	open_file(char *file)
 {

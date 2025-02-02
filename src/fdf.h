@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef FDF_H
 # define FDF_H
 
 # include "../libft/libft.h"
 # include <math.h>
 # include <fcntl.h>
-# include "../minilibx_macos/mlx.h"
+# include "../minilibx_linux/mlx.h"
 
 // # define PRM  matrix[0][0]888
 
@@ -54,6 +53,5 @@ int				open_file(char *file);
 int				get_width(char *file);
 int				get_height(char *file);
 void			arg_error(int error);
-
 
 #endif

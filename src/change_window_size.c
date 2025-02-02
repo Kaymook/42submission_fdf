@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int		check_win_size(int key, t_dot *prm)
+int	check_win_size(int key, t_dot *prm)
 {
 	if ((key == 0 && prm->win_y <= 500) || (key == 6 && prm->win_x <= 500))
 		return (1);

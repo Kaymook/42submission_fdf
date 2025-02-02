@@ -47,8 +47,9 @@ void	do_key(int key, t_dot *prm)
 		prm->angle -= 0.05;
 }
 
-int		deal_key(int key, t_dot **matrix, t_dot *prm)
+int	deal_key(int key, t_dot **matrix, t_dot *prm)
 {
+	ft_printf("key:%d\n", key);
 	if (is_key(key))
    	{
         if (prm->mlx_ptr && prm->win_ptr)
@@ -61,7 +62,7 @@ int		deal_key(int key, t_dot **matrix, t_dot *prm)
     }
 	if (key == 6 || key == 7 || key == 0 || key == 1 || key == 3)
 		new_window(key, matrix, prm);
-	if (key == 53)
+	if (key == 65307)
     {
         // if (prm->mlx_ptr && prm->win_ptr)
         // {

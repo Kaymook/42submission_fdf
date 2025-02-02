@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "fdf.h"
-
 
 float	fmodule(float i)
 {
@@ -50,8 +48,20 @@ void	line(t_dot a, t_dot b, t_dot *param)
 	max = ft_max(fmodule(step_x), fmodule(step_y));
 	step_x /= max;
 	step_y /= max;
-	color = (b.z || a.z) ? 0xfc0345 : 0xBBFAFF;
-	color = (b.z != a.z) ? 0xfc031c : color;
+	if (b.z || a.z)
+	{
+		color = 0xfc0345;
+	}
+	else
+	{
+		color = 0xBBFAFF;
+	}
+	if (b.z != a.z)
+	{
+		color = 0xfc031c;
+	}
+	// color = (b.z || a.z) ? 0xfc0345 : 0xBBFAFF;
+	// color = (b.z != a.z) ? 0xfc031c : color;
 	while ((int)(a.x - b.x) || (int)(a.y - b.y))
 	{
 		mlx_pixel_put(param->mlx_ptr, param->win_ptr, a.x, a.y, color);

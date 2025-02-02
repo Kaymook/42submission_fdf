@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void set_default(t_dot *param)
+void	set_default(t_dot *param)
 {
 	param->scale = 20;
 	param->z_scale = 50;
@@ -29,7 +29,6 @@ void set_default(t_dot *param)
 		ft_error("mlx_new_window");
 }
 
-
 static int	destroy(t_dot *data, t_dot **matrix)
 {
 	(void)matrix;
@@ -40,6 +39,7 @@ static int	destroy(t_dot *data, t_dot **matrix)
 // {
 // 	system("leaks -q fdf");
 // }
+
 int	main(int argc, char **argv)
 {
 	t_dot	**matrix;
@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	matrix = read_map(*++argv);
 	set_default(&prm);
 	draw(matrix, &prm);
-	mlx_hook(prm.win_ptr, 17, 0, destroy,  matrix);
-	mlx_key_hook(prm.win_ptr, deal_key, matrix);	
+	mlx_hook(prm.win_ptr, 17, 0, destroy, matrix);
+	mlx_key_hook(prm.win_ptr, deal_key, matrix);
 	mlx_loop(prm.mlx_ptr);
 }

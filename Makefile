@@ -10,20 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
-FRAEMWORKS=-framework OpenGL -framework AppKit
-FLAGS=-Werror -Wextra -Wall
+# FRAEMWORKS=-framework OpenGL -framework AppKit
+FLAGS=-Werror -Wextra -Wall 
+MLXFLAGS= -lX11 -lm -lXext
 NAME=fdf
 SRC=src/*.c
-INCLUDES=libft/libft.a minilibx_macos/libmlx.a
+INCLUDES=libft/libft.a minilibx_linux/libmlx.a
 
 all:
 	@make -C libft/ all
-	@make -C minilibx_macos/ all
-	gcc $(SRC) -o $(NAME) $(FLAGS) $(INCLUDES) $(FRAEMWORKS)
+	@make -C minilibx_linux/ all
+	gcc $(SRC) -o $(NAME) $(FLAGS) $(INCLUDES) $(MLXFLAGS) $(FRAEMWORKS)
 
 clean:
 	@make -C libft/ clean
-	@make -C minilibx_macos/ clean
+	@make -C minilibx_linux/ clean
 
 fclean: clean
 	/bin/rm -f $(NAME)
