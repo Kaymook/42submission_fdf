@@ -6,7 +6,7 @@
 /*   By: mosh <mosh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 19:04:04 by kmoshker          #+#    #+#             */
-/*   Updated: 2024/09/09 02:09:42 by mosh             ###   ########.fr       */
+/*   Updated: 2025/02/03 02:07:01 by mosh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ float	ft_max(float a, float b)
 	return (a);
 }
 
+static int	set_color(t_dot a, t_dot b)
+{
+	int	color;
+
+	if (a.z || b.z)
+		color = 0xfc0345;
+	else
+		color = 0xBBFAFF;
+	if (a.z != b.z)
+		color = 0xfc031c;
+	return (color);
+}
+
 void	line(t_dot a, t_dot b, t_dot *param)
 {
 	float	step_x;
@@ -48,20 +61,7 @@ void	line(t_dot a, t_dot b, t_dot *param)
 	max = ft_max(fmodule(step_x), fmodule(step_y));
 	step_x /= max;
 	step_y /= max;
-	if (b.z || a.z)
-	{
-		color = 0xfc0345;
-	}
-	else
-	{
-		color = 0xBBFAFF;
-	}
-	if (b.z != a.z)
-	{
-		color = 0xfc031c;
-	}
-	// color = (b.z || a.z) ? 0xfc0345 : 0xBBFAFF;
-	// color = (b.z != a.z) ? 0xfc031c : color;
+	color = set_color(a, b);
 	while ((int)(a.x - b.x) || (int)(a.y - b.y))
 	{
 		mlx_pixel_put(param->mlx_ptr, param->win_ptr, a.x, a.y, color);
