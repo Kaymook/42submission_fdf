@@ -46,6 +46,7 @@ SRCS =	ft_strlen.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
 		get_next_line/get_next_line.c \
+		get_next_line/get_next_line_utils.c \
 		ft_printf/ft_printf.c \
 		ft_printf/utils.c \
 

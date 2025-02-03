@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosh <mosh@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kmoshker <kmoshker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 22:30:36 by kmoshker          #+#    #+#             */
-/*   Updated: 2024/09/19 21:50:49 by mosh             ###   ########.fr       */
+/*   Updated: 2025/02/03 23:44:25 by kmoshker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,18 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdlib.h>
+# include <sys/types.h>
 # include "ft_printf/ft_printf.h"
+
+# ifndef EOB
+#  define EOB -1
+# endif
+
+# define GNL_SUCCESS_FIN 0
+# define GNL_FAILURE_BUFFER_SIZE 1
+# define GNL_FAILURE_FD 2
+# define GNL_FAILURE_MALLOC 3
+# define GNL_FAILURE_READ 4
 
 typedef struct s_list
 {
@@ -78,8 +89,27 @@ void	ft_lstdelone(t_list *lst, void (*del)(int));
 void	ft_lstiter(t_list *lst, void (*f)(int));
 // t_list	*ft_lstmap(t_list *lst, void *(*f)(int), void (*del)(int));
 int		ft_abs(int num);
-char	*get_next_line(int fd);
-char	*read_line(int fd, char *memory);
-char	*trim_line(char *memory);
-char	*trim_over_line(char *memory);
+
+typedef struct s_fd
+{
+	int			fd;
+	char		*leftover;
+	ssize_t		lo_len;
+	ssize_t		lo_eol_i;
+	char		*readbuff;
+	ssize_t		rb_len;
+	struct s_fd	*prev;
+	struct s_fd	*next;
+}	t_fd;
+
+char	*get_next_line(int fd, int *return_code);
+char	*get_next_line_core(int fd, t_fd *f, int *return_code);
+ssize_t	find_eol(char *str);
+char	*gnl_strjoin(t_fd *f_p);
+char	*gnl_split(t_fd *f_p);
+char	*gnl_free(t_fd *f_p, char **p_p, char *return_value);
+void	delete_fd_node(t_fd *f_p);
+t_fd	*new_fd_node(t_fd *last_node, int fd);
+t_fd	*get_fd_node(t_fd *lst, int fd, int *return_code);
+
 #endif

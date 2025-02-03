@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosh <mosh@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kmoshker <kmoshker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 19:03:35 by kmoshker          #+#    #+#             */
-/*   Updated: 2024/09/19 21:51:27 by mosh             ###   ########.fr       */
+/*   Updated: 2025/02/03 23:46:06 by kmoshker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	get_dots_from_line(char *line, t_dot **matrix_of_dots, int y)
 	int		x;
 
 	dots = ft_split(line, ' ');
+	if (!dots)
+		ft_error("ft_split");
 	x = 0;
 	while (dots[x])
 	{
@@ -42,8 +44,14 @@ t_dot	**memory_allocete(char *file_name)
 	x = get_width(file_name);
 	y = get_height(file_name);
 	new = (t_dot **)malloc(sizeof(t_dot *) * (++y + 1));
+	if (!new)
+        ft_error("malloc");
 	while (y > 0)
+	{
 		new[--y] = (t_dot *)malloc(sizeof(t_dot) * (x + 1));
+		if (!new[y])
+        	ft_error("malloc");
+	}
 	return (new);
 }
 
@@ -53,13 +61,14 @@ t_dot	**read_map(char *file_name)
 	int		i;
 	int		fd;
 	char	*line;
+	int		gnl_rv;
 
 	fd = open_file(file_name);
 	matrix_of_dots = memory_allocete(file_name);
 	i = 0;
 	while (get_height(file_name) > i)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(fd, &gnl_rv);
 		get_dots_from_line(line, matrix_of_dots, i++);
 	}
 	matrix_of_dots[i] = NULL;
@@ -82,12 +91,13 @@ int	get_width(char *file)
 	int		width;
 	int		fd;
 	char	*line;
+	int		gnl_rv;
 
 	fd = open_file(file);
-	line = get_next_line(fd);
+	line = get_next_line(fd, &gnl_rv);
 	if (!line)
 		ft_error("gnl");
-	while (get_next_line(fd))
+	while (get_next_line(fd, &gnl_rv))
 		;
 	width = count_words(line, ' ');
 	free(line);
@@ -100,15 +110,16 @@ int	get_height(char *file)
 	int		height;
 	int		fd;
 	char	*gnl;
+	int		gnl_rv;
 
 	fd = open_file(file);
 	height = 0;
-	gnl = get_next_line(fd);
+	gnl = get_next_line(fd, &gnl_rv);
 	while (gnl)
 	{
 		height++;
 		free(gnl);
-		gnl = get_next_line(fd);
+		gnl = get_next_line(fd, &gnl_rv);
 	}
 	free (gnl);
 	close(fd);
